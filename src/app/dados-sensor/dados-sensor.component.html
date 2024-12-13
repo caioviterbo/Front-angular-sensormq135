@@ -1,35 +1,35 @@
-<mat-card appearance="outlined">
+<mat-card class="card">
   <table mat-table [dataSource]=" dataSource" class="mat-elevation-z8 demo-table">
     <!-- Position Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>No.</th>
-      <td mat-cell *matCellDef="let dados">{{dados.id}}</td>
+    <ng-container matColumnDef="qualidadeAr">
+      <th mat-header-cell *matHeaderCellDef>Qualidade do Ar</th>
+      <td mat-cell *matCellDef="let dados">{{dados.MQ135}}</td>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let dados">{{dados.nome}}</td>
+    <ng-container matColumnDef="qtdCarbono">
+      <th mat-header-cell *matHeaderCellDef>Quantidade de Carbono</th>
+      <td mat-cell *matCellDef="let dados">{{dados.MQ7}}</td>
     </ng-container>
 
     <!-- Weight Column -->
-    <ng-container matColumnDef="valor">
-      <th mat-header-cell *matHeaderCellDef>Weight</th>
-      <td mat-cell *matCellDef="let dados">{{dados.valor}}</td>
+    <ng-container matColumnDef="qualidadeGeral">
+      <th mat-header-cell *matHeaderCellDef>Qualidade Geral</th>
+      <td mat-cell *matCellDef="let dados">{{dados.Qualidade}}</td>
     </ng-container>
 
     <!-- Symbol Column -->
-    <ng-container matColumnDef="unidade">
-      <th mat-header-cell *matHeaderCellDef>Symbol</th>
-      <td mat-cell *matCellDef="let dados">{{dados.unidade}}</td>
+    <ng-container matColumnDef="timeStamp">
+      <th mat-header-cell *matHeaderCellDef>Data da Analise</th>
+      <td mat-cell *matCellDef="let dados">{{dados.TimeStamp}}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
   </table>
-  <mat-paginator [length]="100"
+  <mat-paginator
               [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              aria-label="Select page">
+              [pageSizeOptions]="[10, 25, 50]"
+              (page)="onPageChange($event)">
 </mat-paginator>
 </mat-card>

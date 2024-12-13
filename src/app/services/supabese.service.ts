@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { environment } from '../environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,23 +9,37 @@ export class SupabeseService {
   private supabase: SupabaseClient;
 
   constructor() {
-    const supabaseUrl = 'https://krccnsbfofpowxdzspwc.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtyY2Nuc2Jmb2Zwb3d4ZHpzcHdjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQwMjQyNjksImV4cCI6MjA0OTYwMDI2OX0.5r-KaYdn6UEdaVnQOaN3nDp4SCIs6WH6DUecnzhRXko';
+    const supabaseUrl = environment.supabaseUrl;
+    const supabaseKey = environment.supabaseKey;
 
     this.supabase = createClient(supabaseUrl, supabaseKey);
   }
 
-  async getSensorData() {
+
+
+  async getSensorData(page: number, pageSize: number, table: string, columns = '*') {
     try {
+      const from = (page - 1) * pageSize;
+      const to = from + pageSize - 1;
+
       const { data, error } = await this.supabase
-        .from('sensores')
-        .select('*');
+        .from(table)
+        .select(columns)
+        .range(from, to);
 
       if (error) throw error;
-      return data;
+
+      const { count, error: countError } = await this.supabase
+        .from(table)
+        .select('*', { count: 'exact', head: true });
+
+      if (countError) throw countError;
+
+      return { data, count: count ?? 0};
+
     } catch (error) {
       console.error('Erro ao buscar dados do Supabase:', error);
-      return [];
+      return { data: [], count: 0 };
     }
   }
 }

@@ -1,12 +1,4 @@
 export const environment = {
-    production: false,
-    firebase: {
-      apiKey: "AIzaSyCSxcdzHmSeV2ORAf1Y0j6YvrZxJyTc5Cc",
-      authDomain: "sensor-mq-135-c624a.firebaseapp.com",
-      projectId: "sensor-mq-135-c624a",
-      storageBucket: "sensor-mq-135-c624a.firebasestorage.app",
-      messagingSenderId: "988219748901",
-      appId: "1:988219748901:web:f503129fe9c15f574c45cc",
-      measurementId: "G-YY7CYCVREM"
-    }
+   supabaseUrl: 'https://krccnsbfofpowxdzspwc.supabase.co',
+   supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtyY2Nuc2Jmb2Zwb3d4ZHpzcHdjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQwMjQyNjksImV4cCI6MjA0OTYwMDI2OX0.5r-KaYdn6UEdaVnQOaN3nDp4SCIs6WH6DUecnzhRXko'
 };
